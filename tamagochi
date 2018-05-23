@@ -1,0 +1,184 @@
+# Tamagochi
+<!DOCTYPE html >
+<html>
+<head><meta charset="utf-8"/>
+    <style>
+#miBarra1 {
+  position:absolute; left:10px; top: 40px;
+  width: 0.005%; height: 10px;
+  background-color: #bb0303;
+}
+#miBarra2 {
+  position:absolute; left:10px; top: 80px;
+  width: 0.005%; height: 10px;
+  background-color: #25f2fa;
+}
+#miBarra3 {
+  position:absolute; left:10px; top: 120px;
+  width: 0.005%; height: 10px;
+  background-color: #fffc00;
+}
+#contenedor_barras {
+  position:absolute; left:10px; top: 300px;
+  width: 50%; height: 100px;
+  background-color: #ffffff;
+}
+</style>
+<script>
+
+let objContador = (function (inicio) {
+  let peso = 50;
+  let higiene = 50;
+  let energia = 50;
+  let dibujo= "Spiderman";
+ 
+  return {
+  
+ moveBarras: function() {
+  let barra_peso = document.getElementById("miBarra1");   
+  barra_peso.style.width = peso + '%'; 
+    let barra_higiene = document.getElementById("miBarra2");   
+  barra_higiene.style.width = higiene + '%'; 
+      let barra_energia = document.getElementById("miBarra3");   
+  barra_energia.style.width = energia + '%'; 
+            },
+    restarhigiene: function (num) {
+      higiene = higiene - num;
+      if (higiene <= 10)  higiene = 0;
+    },
+      
+    incrementarhigiene: function (num) {
+      higiene = higiene + num;
+        if (higiene >= 100) higiene = 100;
+        
+    },
+      
+    incrementarpeso: function (num) {
+      peso = peso + num;
+        if (peso >= 100){
+            peso = 100;
+            if (peso>=100){
+                elem.style.width= '1%';
+            }
+        }
+    },
+    
+    restarenergia: function (num) {
+      energia = energia - num;
+      if (energia <= 0)  energia = 0;
+    },
+      
+     sumarenergia: function (num) {
+     energia = energia + num;
+         if (energia >= 100){
+          energia = 100;
+      }
+    },
+     
+    restarpeso: function (num) {
+      peso = peso - num;
+        if (peso <= 0) peso = 0;
+    },
+    
+            
+    salirpantalla: function () {
+      let cadena = "Higiene: " + higiene + "  Peso: " + peso + "  Energía " + energia;
+      document.getElementById("salida").innerHTML = cadena;
+      this.dibujoTama()
+      
+    },
+ 
+    dibujoTama: function () {   
+    let dibujo= "Spiderman";
+    if (peso >= 80){
+         dibujo = "<img src='gordo.png'>"; 
+        } 
+    if (peso <= 39){
+         dibujo = "<img src='delgado.png'>";   
+        }
+    if (peso >=40 && peso <=79){
+         dibujo = "<img src='normal.png'>";   
+        }
+    if (peso <=0){
+        dibujo= "<img src='delgadomuerto.png'>";
+    }
+    if (peso>=98){
+        dibujo="<img src='gordomuerto.png'>";
+    }
+      
+    document.getElementById("salida2").innerHTML = dibujo; 
+         this.moveBarras()
+
+    },
+  };
+})();
+ 
+    
+function programa(menu){   // programa(menu, aumento)  2 parametros
+    switch (menu){
+        case 1:
+            objContador.incrementarpeso(3);
+            objContador.restarhigiene(2);
+            objContador.sumarenergia(5);
+            break;
+        case 2:
+            objContador.incrementarpeso(3);
+            objContador.restarhigiene(1); 
+            objContador.sumarenergia(5); 
+            break;
+        case 3:
+            objContador.incrementarpeso(3);
+            objContador.restarhigiene(3); 
+            objContador.sumarenergia(5);
+            break;
+        case 4:
+            objContador.incrementarpeso(1);
+            objContador.restarhigiene(1); 
+            objContador.sumarenergia(2);
+            break;
+        case 5:
+            objContador.restarenergia(5);
+            objContador.incrementarhigiene(10);
+            break;
+        case 6:
+            objContador.sumarenergia(8);
+            objContador.incrementarpeso(10);
+            break;
+        case 7:
+            objContador.restarenergia(7);
+            objContador.restarhigiene(10);
+            objContador.restarpeso(5);
+            break;
+    }       
+    
+    objContador.salirpantalla();
+} 
+    
+</script>
+</head>
+<body>
+ <div id="salida"></div>
+ <input type="button" value="Hamburguesa" onclick="programa(1)" >
+ <input type="button" value="Platano" onclick="programa(2)" >
+ <input type="button" value="Chocolate" onclick="programa(3)" >
+ <input type="button" value="Ensalada" onclick="programa(4)" >
+ <input type="button" value="Ducharse" onclick="programa(5)" >
+ <input type="button" value="Dormir" onclick="programa(6)" >
+ <input type="button" value="Jugar" onclick="programa(7)" >
+ <div id="salida2"></div>
+ 
+ <div id="contenedor_barras">
+ <div id="miBarra1">
+     <img src="hamburguesa.jpg"= height="35" width="35">
+     </div>
+ <div id="miBarra2">
+          <img src="jabon.jpg"= height="35" width="35">
+     </div>
+ <div id="miBarra3">
+     <img src="rayo.jpg"= height="35" width="35">
+     </div>
+ </div>
+ 
+ 
+</body>
+</html>
